@@ -3,4 +3,3 @@
 
 ![AHB2APB BRIDGE DESIGN](image.png)
 
-<b><embed src="AHB2APB BRIDGE DESIGN.pdf" type="application/pdf" width="100%" height="600px" /></b>
