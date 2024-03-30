@@ -1,0 +1,7 @@
+D:/verilog_prac_program/AHB_slave_interface.v {0 {vlog -work work -stats=none D:/verilog_prac_program/AHB_slave_interface.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module AHB_slve_interface
+** Error: (vlog-13069) D:/verilog_prac_program/AHB_slave_interface.v(4): near "output": syntax error, unexpected output, expecting ')'.
+** Error: (vlog-13053) D:/verilog_prac_program/AHB_slave_interface.v(66): near "'8": Illegal base specifier in numeric constant.
+
+} {4.0 6.0} {}}

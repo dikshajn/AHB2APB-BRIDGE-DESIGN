@@ -1,0 +1,157 @@
+/*
+module AHB_slave_interface_tb();
+
+  // Inputs
+  reg hclk;
+  reg hresetn;
+  reg hwrite;
+  reg [1:0] htrans;
+  reg [31:0] haddr;
+  reg [31:0] hwdat;
+  reg hreadyin;
+
+  // Outputs
+  reg valid;
+  reg [2:0] temp_selx;
+  reg [31:0] hrdata;
+  reg hwrite_reg, hwrite_reg_1;
+  reg [31:0] haddr_1, haddr_2, hwdata_1, hwdata_2;
+
+  // Instantiate AHB_slave_interface module
+  AHB_slave_interface DUT (
+    .hclk(hclk),
+    .hresetn(hresetn),
+    .hwrite(hwrite),
+    .htrans(htrans),
+    .haddr(haddr),
+    .hwdat(hwdat),
+    .hreadyin(hreadyin),
+    .valid(valid),
+    .hwrite_reg(hwrite_reg),
+    .hwrite_reg_1(hwrite_reg_1),
+    .haddr_1(haddr_1),
+    .haddr_2(haddr_2),
+    .hwdata_1(hwdata_1),
+    .hwdata_2(hwdata_2),
+    .temp_selx(temp_selx),
+    .hrdata(hrdata)
+  );
+
+  // Clock generation because it is sequential , eithier initial or clock
+  always @(posedge hclk) 
+
+  // Initial block for simulation setup
+  initial begin
+    // Initialize inputs
+    hclk = 0;
+    hresetn = 0;
+    hwrite = 0;
+    htrans = 2'b00; // Example: Non-sequential transfer
+    haddr = 32'h80000000; // Example address within the specified range
+    hwdat = 32'h12345678;
+    hreadyin = 1;
+
+    // task reset
+    task_reset()
+    @ reset=1'b0  //whatever data is present will be erased 
+    @ reset=1'b1
+
+    // task inputs
+    task_inputs(input a,b,input 1'b0 c)
+    htrans=c
+
+    //initial block to call task afterautomatic clk generation
+    initial
+     begin 
+      task_reset();
+      task_inputs();
+
+    
+    #1000 $finish;
+  end
+
+endmodule
+*/
+
+
+
+
+
+module AHB_slave_interface_tb();
+
+  // Inputs
+  reg hclk;
+  reg hresetn;
+  reg hwrite;
+  reg [1:0] htrans;
+  reg [31:0] haddr;
+  reg [31:0] hwdat;
+  reg hreadyin;
+
+  // Outputs
+  reg valid;
+  reg [2:0] temp_selx;
+  reg [31:0] hrdata;
+  reg hwrite_reg, hwrite_reg_1;
+  reg [31:0] haddr_1, haddr_2, hwdata_1, hwdata_2;
+
+  // Instantiate AHB_slave_interface module
+  AHB_slave_interface DUT (
+    .hclk(hclk),
+    .hresetn(hresetn),
+    .hwrite(hwrite),
+    .htrans(htrans),
+    .haddr(haddr),
+    .hwdat(hwdat),
+    .hreadyin(hreadyin),
+    .valid(valid),
+    .hwrite_reg(hwrite_reg),
+    .hwrite_reg_1(hwrite_reg_1),
+    .haddr_1(haddr_1),
+    .haddr_2(haddr_2),
+    .hwdata_1(hwdata_1),
+    .hwdata_2(hwdata_2),
+    .temp_selx(temp_selx),
+    .hrdata(hrdata)
+  );
+
+  // Clock generation
+   always @(posedge hclk)  // Adjust the time delay based on your design requirements
+
+  // Task for reset
+  task task_reset;
+    hresetn = 0;
+    #5 hresetn = 1;
+  endtask
+
+  // Task for applying inputs
+  task task_inputs;
+    input a, b;
+    input [0:0] c;
+
+    htrans = c;
+    
+  endtask
+
+  // Initial block for simulation setup
+  initial begin
+    // Initialize inputs
+    hclk = 0;
+    hresetn = 0;
+    hwrite = 0;
+    htrans = 2'b00; // Example: Non-sequential transfer
+    haddr = 32'h80000000; // Example address within the specified range
+    hwdat = 32'h12345678;
+    hreadyin = 1;
+
+    // Call reset task
+    task_reset();
+
+    // Call inputs task
+    task_inputs();
+
+    // Wait for a while
+    #1000 $finish;
+  end
+
+endmodule
